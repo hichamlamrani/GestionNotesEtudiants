@@ -59,10 +59,10 @@ namespace GestionNotesEtudiants
             Directory.CreateDirectory(Outils.DataFolder);
             string path = Path.Combine(currentDirectory, Outils.DataFolder);
             DirectoryInfo files = new DirectoryInfo(path);
-            foreach (FileInfo file in files.GetFiles(".json"))
+            foreach (FileInfo file in files.GetFiles())
             {
                 //var fileWriter = File.CreateText(file.ToString());
-                var fileWriter = new StreamReader(file.ToString());
+                var fileWriter = new StreamReader(Path.Combine(path, file.Name));
                 var serializer = new JsonSerializer();
                 Etudiant e = (Etudiant)serializer.Deserialize(fileWriter, typeof(Etudiant));
                 foreach (Notes note in e.getListeNotes())
