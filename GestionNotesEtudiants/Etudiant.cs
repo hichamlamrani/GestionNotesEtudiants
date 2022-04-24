@@ -12,10 +12,12 @@ namespace GestionNotesEtudiants
         public int numeroEtudiant;
         public string nom;
         public string prenom;
+        public List<Notes> listeNotes;
 
         public Etudiant()
         {
             this.numeroEtudiant = ++Etudiant.counter;
+            this.listeNotes = new List<Notes>();
         }
 
         public Etudiant(string nom, string prenom) : this()
@@ -26,13 +28,27 @@ namespace GestionNotesEtudiants
 
         // Getter & Setter
         public int getNumeroEtudiant() { return this.numeroEtudiant; }
+        // public void setNumeroEtudiant(int numeroEtudiant) { this.numeroEtudiant = numeroEtudiant; }
         public string getNom() { return this.nom; }
         public void setNom(string nom) { this.nom = nom; }
         public string getPrenom() { return this.prenom; }
         public void setPrenom(string prenom) { this.prenom = prenom; }
 
+        public List<Notes> getListeNotes() { return this.listeNotes; }
+
         //public string getFullName() { return this.nom + " " + this.prenom;  }
 
+
+        public void addNewNotes(Cours cour, double note)
+        {
+            this.listeNotes.Add(new Notes(this, cour, note));
+        }
+
+        public void updateNotes(Cours cour, double newNote)
+        {
+            Notes note = this.listeNotes.Where((e) => e.getCours().Equals(cour)).First();
+            if (note != null) note.setNote(newNote);
+        }
 
         public override bool Equals(object obj)
         {
@@ -45,6 +61,7 @@ namespace GestionNotesEtudiants
         {
             return $"Etudiant : {this.nom} {this.prenom}, numero : {this.numeroEtudiant}";
         }
+
 
         public override int GetHashCode()
         {
