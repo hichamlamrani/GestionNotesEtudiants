@@ -72,7 +72,6 @@ namespace GestionNotesEtudiants
                 _ret.Add(e);
 
             }
-
             return _ret;
         }
 
