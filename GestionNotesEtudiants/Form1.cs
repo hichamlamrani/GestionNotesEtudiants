@@ -34,17 +34,26 @@ namespace GestionNotesEtudiants
 
             etudiantsDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             etudiantsDataGridView.CellClick += dataGridView_CellClick;
+            //generateTestData();
             loadData();
+        }
+        private void  generateTestData()
+        {
+            List<Etudiant> temp = new List<Etudiant>();
+            for (int i = 0; i < 10; i++)
+            {
+                temp.Add( new Etudiant(nom: "Nom " + i, prenom: "Prenom " + i));
+            }
+            Outils.saveListDataToFiles(temp);
         }
         private void loadData()
         {
-            this.etudiants = new List<Etudiant>();
-            // TODO Load data from files
-            // TODO this.etudiants = Outils.loadDataFromFiles();
-            for (int i = 0; i < 10; i++)
+            // Load data from files
+            this.etudiants = Outils.loadDataFromFiles();
+            foreach(Etudiant e in this.etudiants)
             {
-                Etudiant e = new Etudiant(nom: "Nom " + i, prenom: "Prenom " + i);
-                etudiants.Add(e);
+             //   Etudiant e = new Etudiant(nom: "Nom " + i, prenom: "Prenom " + i);
+               // etudiants.Add(e);
                 etudiantsDataGridView.Rows.Add(e.getNumeroEtudiant(), e.getNom(), e.getPrenom());
                 DataGridViewButtonColumn editButton= new DataGridViewButtonColumn();
                 DataGridViewButtonColumn deleteButton = new DataGridViewButtonColumn();
