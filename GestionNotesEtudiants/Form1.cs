@@ -40,9 +40,17 @@ namespace GestionNotesEtudiants
         private void  generateTestData()
         {
             List<Etudiant> temp = new List<Etudiant>();
+            List<Cours> tempC = new List<Cours>();
             for (int i = 0; i < 10; i++)
             {
-                temp.Add( new Etudiant(nom: "Nom " + i, prenom: "Prenom " + i));
+                if (i < 5) tempC.Add(new Cours(code: $"CR{i + 1}", title: $"Cours {i + 1}"));
+
+                Etudiant e = new Etudiant(nom: "Nom " + i, prenom: "Prenom " + i);
+                
+                e.addNewNotes(cour: tempC[i % 5], 1.5 * i);
+                e.addNewNotes(cour: tempC[i % 4], 2 * i);
+
+                temp.Add(e);
             }
             Outils.saveListDataToFiles(temp);
         }
