@@ -76,7 +76,17 @@ namespace GestionNotesEtudiants
             return _ret;
         }
 
-        
+        public static string getReleve(Etudiant etudiant)
+        {
+
+            string releve = $"Releve des notes pour l'etudiant : {etudiant} \n";
+            foreach (Notes note in etudiant.getListeNotes())
+            {
+                releve += $"{note.ToString()}\n";
+            }
+            return releve;
+        }
+
 
 
     }
