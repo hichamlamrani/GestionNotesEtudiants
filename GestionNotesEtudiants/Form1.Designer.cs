@@ -28,12 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.etudiantsDataGridView = new System.Windows.Forms.DataGridView();
+            this.etudiantBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.etudiantsDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.etudiantBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -42,7 +48,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Location = new System.Drawing.Point(35, 12);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(776, 426);
@@ -50,6 +56,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.etudiantsDataGridView);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -86,6 +93,18 @@
             this.tabPage4.Text = "Détails Cours";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // etudiantsDataGridView
+            // 
+            this.etudiantsDataGridView.AllowUserToAddRows = false;
+            this.etudiantsDataGridView.AllowUserToDeleteRows = false;
+            this.etudiantsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.etudiantsDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.etudiantsDataGridView.Name = "etudiantsDataGridView";
+            this.etudiantsDataGridView.RowHeadersWidth = 51;
+            this.etudiantsDataGridView.RowTemplate.Height = 24;
+            this.etudiantsDataGridView.Size = new System.Drawing.Size(768, 397);
+            this.etudiantsDataGridView.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -95,6 +114,9 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.etudiantsDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.etudiantBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -106,6 +128,8 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.DataGridView etudiantsDataGridView;
+        private System.Windows.Forms.BindingSource etudiantBindingSource;
     }
 }
 
