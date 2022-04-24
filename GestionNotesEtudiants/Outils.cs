@@ -30,8 +30,54 @@ namespace GestionNotesEtudiants
                 Outils.saveDataToFile(etudiant);
             }
         }
+        public static Etudiant loadEtudiantFromFile(int numero)
+        {
+            Directory.CreateDirectory(Outils.DataFolder);
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string path = Path.Combine(currentDirectory, Outils.DataFolder);
+            string filePath = Path.Combine(path, numero.ToString()) + ".json";
+
+            if (!File.Exists(filePath)) return null;
+            Etudiant e;
+            //Etudiant e = JsonConvert.DeserializeObject<Etudiant>(File.ReadAllText(filePath));
+            using (StreamReader file = File.OpenText(@filePath))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                e = (Etudiant)serializer.Deserialize(file, typeof(Etudiant));
+                foreach (Notes note in e.getListeNotes())
+                {
+                    note.setEtudiant(e);
+                }
+            }
+            return e;
+
+        }
+        public static List<Etudiant> loadDataFromFiles()
+        {
+            List<Etudiant> _ret = new List<Etudiant>();
+            string currentDirectory = Directory.GetCurrentDirectory();
+            Directory.CreateDirectory(Outils.DataFolder);
+            string path = Path.Combine(currentDirectory, Outils.DataFolder);
+            DirectoryInfo files = new DirectoryInfo(path);
+            foreach (FileInfo file in files.GetFiles(".json"))
+            {
+                //var fileWriter = File.CreateText(file.ToString());
+                var fileWriter = new StreamReader(file.ToString());
+                var serializer = new JsonSerializer();
+                Etudiant e = (Etudiant)serializer.Deserialize(fileWriter, typeof(Etudiant));
+                foreach (Notes note in e.getListeNotes())
+                {
+                    note.setEtudiant(e);
+                }
+                _ret.Add(e);
+
+            }
+
+            return _ret;
+        }
 
         
+
 
     }
 }
