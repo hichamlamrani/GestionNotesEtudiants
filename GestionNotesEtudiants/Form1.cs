@@ -20,16 +20,16 @@ namespace GestionNotesEtudiants
         }
         private void buildGrid()
         {
-            etudiantsDataGridView.ColumnCount = 5;
+            etudiantsDataGridView.ColumnCount = 3;
             etudiantsDataGridView.Columns[0].Name = "Numero Etudiant";
             etudiantsDataGridView.Columns[1].Name = "Nom Etudiant";
             etudiantsDataGridView.Columns[2].Name = "Prénom Etudiant";
-            etudiantsDataGridView.Columns[3].Name = "Edit";
-            etudiantsDataGridView.Columns[4].Name = "Delete";
+            //etudiantsDataGridView.Columns[3].Name = "Edit";
+            //tudiantsDataGridView.Columns[4].Name = "Delete";
 
             etudiantsDataGridView.Columns[0].ReadOnly = true;
-            etudiantsDataGridView.Columns[3].ReadOnly = true;
-            etudiantsDataGridView.Columns[4].ReadOnly = true;
+            //etudiantsDataGridView.Columns[3].ReadOnly = true;
+            //etudiantsDataGridView.Columns[4].ReadOnly = true;
 
 
             etudiantsDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -39,24 +39,27 @@ namespace GestionNotesEtudiants
         private void loadData()
         {
             this.etudiants = new List<Etudiant>();
+            // TODO Load data from files
+            // TODO this.etudiants = Outils.loadDataFromFiles();
             for (int i = 0; i < 10; i++)
             {
                 Etudiant e = new Etudiant(nom: "Nom " + i, prenom: "Prenom " + i);
-                etudiantsDataGridView.Rows.Add(e.getNumeroEtudiant(), e.getNom(), e.getPrenom(), "edit btn", "delete btn");
+                etudiants.Add(e);
+                etudiantsDataGridView.Rows.Add(e.getNumeroEtudiant(), e.getNom(), e.getPrenom());
                 DataGridViewButtonColumn editButton= new DataGridViewButtonColumn();
                 DataGridViewButtonColumn deleteButton = new DataGridViewButtonColumn();
 
-                editButton.Name = "edit_column";
+                editButton.Name = "Edit";
                 editButton.Text = "Edit";
                 
-                if (etudiantsDataGridView.Columns["edit_column"] == null)
+                if (etudiantsDataGridView.Columns["Edit"] == null)
                 {
                     etudiantsDataGridView.Columns.Insert(3, editButton);
                 }
-                deleteButton.Name = "delete_column";
+                deleteButton.Name = "Delete";
                 deleteButton.Text = "Delete";
                 
-                if (etudiantsDataGridView.Columns["delete_column"] == null)
+                if (etudiantsDataGridView.Columns["Delete"] == null)
                 {
                     etudiantsDataGridView.Columns.Insert(4, deleteButton);
                 }
@@ -67,13 +70,17 @@ namespace GestionNotesEtudiants
         }
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == etudiantsDataGridView.Columns["edit_column"].Index)
+            if (e.ColumnIndex == etudiantsDataGridView.Columns["Edit"].Index)
             {
                 //TODO Go to Etudiant detail panel.
+                MessageBox.Show("Edit Etudiant" + this.etudiants);
+                
             }
-            else if(e.ColumnIndex == etudiantsDataGridView.Columns["delete_column"].Index)
+            else if(e.ColumnIndex == etudiantsDataGridView.Columns["Delete"].Index)
             {
                 // TODO delete the item
+                MessageBox.Show("Delete Etudiant");
+
             }
         }
     }
